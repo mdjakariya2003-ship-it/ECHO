@@ -1,5 +1,5 @@
 // Caches the app shell so ECHO reopens offline after the first successful load.
-const CACHE = 'echo-shell-v1'; // bump this when you change any cached file
+const CACHE = 'echo-shell-v2'; // bump this when you change any cached file
 const SHELL = ['./', './index.html', './styles.css', './js/app.js', './js/core.js', './js/stores.js', './js/demo.js'];
 
 self.addEventListener('install', (e) => {
