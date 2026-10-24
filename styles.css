@@ -27,3 +27,4 @@ button.danger{background:var(--warn);color:#fff}
 .visually-hidden:focus-visible+*{outline:3px solid var(--accent)}
 .skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--card);padding:.5rem;z-index:9}
 footer{opacity:.7;font-size:.85rem;padding-bottom:2rem}
+[hidden]{display:none !important}
