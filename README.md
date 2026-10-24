@@ -76,4 +76,5 @@ Before making any "first/unique" claim, research and record results for each pro
 | Local-first apps | Obsidian Sync, Logseq, Anytype, Standard Notes |
 | P2P transports | WebRTC data channel libs (PeerJS, simple-peer), libp2p, Hypercore/Holepunch, Syncthing |
 | Questions to answer for each | Works offline? Needs server? Conflict handling? Encryption? Licence? Last activity? Maintained? |
-| Then write | A comparison table with links and dates; claim only the specific, verified difference (e.g. "small, dependency-free teaching prototype"). |
+| Then write | A comparison table with links and dates; claim only the specific, verified difference (e.g. "small, dependency-free teaching prototypeECHO|
+Live site: https://mdjakariya2003-ship-it.github.io/ECHO
