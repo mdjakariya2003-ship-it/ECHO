@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>ECHO browser tests</title>
+<body style="font:16px system-ui;padding:1rem"><h1>ECHO browser tests</h1><p>Open via http://localhost:8080/tests/browser-tests.html. Uses a throw-away database.</p><ul id="out"></ul>
+<script type="module">
+import { Engine } from '../js/core.js';
+import { IndexedDBStore } from '../js/stores.js';
+const out = document.getElementById('out');
+const report = (name, ok, d = '') => { const li = document.createElement('li'); li.textContent = `${ok ? 'PASS' : 'FAIL'} ${name} ${d}`; li.style.color = ok ? 'green' : 'crimson'; out.append(li); };
+const dbName = 'echo-test-' + Date.now();
+try {
+  const e1 = new Engine(new IndexedDBStore(dbName), { deviceId: 'tA' });
+  const n = await e1.create('Persist me', 'body');
+  const e2 = new Engine(new IndexedDBStore(dbName), { deviceId: 'tA' }); // fresh connection = like reopening the app
+  report('IndexedDB persistence', (await e2.list()).length === 1 && (await e2.list())[0].id === n.id);
+  const eB = new Engine(new IndexedDBStore(dbName + '-b'), { deviceId: 'tB' });
+  const s = await eB.importJSON(await e1.exportJSON());
+  report('IndexedDB export/import round trip', s.added === 1 && (await eB.list())[0].title === 'Persist me');
+  report('IndexedDB duplicate import', (await eB.importJSON(await e1.exportJSON())).duplicates === 1);
+  let rejected = false; try { await eB.importJSON('{broken'); } catch { rejected = true; }
+  report('IndexedDB corrupted JSON rejected', rejected && (await eB.list()).length === 1);
+} catch (e) { report('IndexedDB tests', false, e.message); }
+try {
+  const reg = await navigator.serviceWorker.getRegistration('../');
+  report('Service worker registered (open the app first)', !!reg);
+  report('App shell is in the cache', !!(await caches.match('../index.html')));
+} catch (e) { report('Service worker checks', false, e.message); }
+</script>
