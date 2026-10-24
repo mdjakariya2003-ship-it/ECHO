@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECHO – offline-first notes</title>
+  <meta name="description" content="Offline-first notes with safe JSON sync between devices.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <h1>ECHO</h1>
+    <p class="tag">Offline-first notes · data stays on this device</p>
+    <ul id="status" aria-label="Status" class="status"></ul>
+  </header>
+
+  <div id="msg" role="status" aria-live="polite" class="msg" hidden></div>
+
+  <main id="main">
+    <section aria-labelledby="edit-h">
+      <h2 id="edit-h">Note</h2>
+      <label for="title">Title</label>
+      <input id="title" maxlength="200" autocomplete="off">
+      <label for="body">Text</label>
+      <textarea id="body" rows="5" maxlength="100000"></textarea>
+      <div class="row">
+        <button id="save" type="button">Save note</button>
+        <button id="cancel" type="button" class="secondary" hidden>Cancel edit</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="list-h">
+      <h2 id="list-h">Notes</h2>
+      <label for="search">Search</label>
+      <input id="search" type="search" autocomplete="off">
+      <ul id="list" class="notes"></ul>
+    </section>
+
+    <section aria-labelledby="conf-h" id="conflicts-section" hidden>
+      <h2 id="conf-h">Conflicts (needs your decision)</h2>
+      <p>The same note was edited on two devices. Nothing was overwritten. Choose what to keep.</p>
+      <ul id="conflicts" class="notes"></ul>
+    </section>
+
+    <section aria-labelledby="sync-h">
+      <h2 id="sync-h">Sync with another device</h2>
+      <p>Export a file here, move it (USB, messaging, cloud drive…) and import it on the other device. ECHO does not upload anything. The file is <strong>not encrypted</strong>.</p>
+      <div class="row">
+        <button id="export" type="button">Export JSON</button>
+        <label class="btn secondary" for="import">Import JSON</label>
+        <input id="import" type="file" accept="application/json,.json" class="visually-hidden">
+      </div>
+    </section>
+
+    <section aria-labelledby="demo-h">
+      <h2 id="demo-h">Demo mode</h2>
+      <p>Runs two simulated devices in memory (your real notes are not touched).</p>
+      <button id="demo" type="button">Run demo</button>
+      <ol id="demo-out" class="demo"></ol>
+    </section>
+  </main>
+  <footer><p>ECHO prototype v0.1 · see README for limitations</p></footer>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
